@@ -27,6 +27,15 @@ glimpse(college_grad_df)
 
 ```{r}
 #your code here
+
+college_grad_df %>% 
+  group_by(major_category) %>%
+  ggplot() +
+  geom_histogram(aes(x = median, fill = major_category)) 
+
+
+table(college_grad_df$major_category)
+
 ```
 
 *Your explanation*
@@ -36,6 +45,18 @@ glimpse(college_grad_df)
 
 ```{r}
 #your code here
+
+college_grad_df %>%
+  group_by(major_category) %>%
+  ggplot() +
+  geom_point(aes(x = sharewomen,
+                  y = median)) + 
+  geom_smooth(aes(x = sharewomen,
+                  y = median),
+              method = "lm",
+              se = FALSE)
+
+
 ```
 
 *Your explanation*
@@ -44,6 +65,9 @@ glimpse(college_grad_df)
 
 ```{r}
 #your code here
+share_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(median ~ sharewomen, data = college_grad_df)
 ```
 
 *Your explanation*
